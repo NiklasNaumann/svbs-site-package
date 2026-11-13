@@ -1,0 +1,10 @@
+page {
+    includeCSS {
+        theme = EXT:sv_bad_schwartau/Resources/Public/Scss/Theme/theme.scss
+	custom = EXT:sv_bad_schwartau/Resources/Public/Css/custom.css
+    }
+
+    includeJSFooter {
+        sv_bad_schwartau_scripts = EXT:sv_bad_schwartau/Resources/Public/JavaScript/main.js
+    }
+}

@@ -1,0 +1,3 @@
+CREATE TABLE tx_bootstrappackage_timeline_item (
+    period varchar(255) DEFAULT '' NOT NULL
+);

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>{title}</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f4f4;padding:30px 0;">
+    <tr>
+        <td align="center">
+
+            <table width="650" cellpadding="0" cellspacing="0" border="0"
+                   style="background:#ffffff;border-radius:8px;overflow:hidden;">
+
+                <!-- Header -->
+                <tr>
+                    <td align="center" style="background:#ffffff;padding:30px;">
+
+                        <img
+                            src="{f:uri.image(src:'EXT:svbs/Resources/Public/Images/logo.svg')}"
+                            alt="SV Bad Schwartau"
+                            style="max-width:180px;height:auto;">
+
+                    </td>
+                </tr>
+
+                <!-- Titel -->
+                <tr>
+                    <td style="padding:0 40px 10px 40px;">
+
+                        <h2 style="margin:0;color:#222;">
+                            Anmeldung zum Schwartauer Open
+                        </h2>
+
+                    </td>
+                </tr>
+
+                <!-- Text -->
+                <tr>
+                    <td style="padding:0 40px 25px 40px;line-height:1.6;color:#444;">
+
+                        <p>
+                            Vielen Dank für deine Anmeldung.
+                        </p>
+
+                        <p>
+                            Wir haben folgende Daten erhalten:
+                        </p>
+
+                    </td>
+                </tr>
+
+                <!-- Daten -->
+                <tr>
+                    <td style="padding:0 40px 30px 40px;">
+
+                        <table width="100%" cellpadding="6" cellspacing="0">
+
+                            <f:for each="{form.formState.formValues}" as="value" key="key">
+
+                                <tr>
+                                    <td width="35%" style="font-weight:bold;border-bottom:1px solid #ddd;">
+                                        {form.formDefinition.renderables.{key}.label}
+                                    </td>
+
+                                    <td style="border-bottom:1px solid #ddd;">
+                                        {value}
+                                    </td>
+                                </tr>
+
+                            </f:for>
+
+                        </table>
+
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td style="background:#f8f8f8;padding:30px 40px;color:#666;font-size:14px;line-height:1.5;">
+
+                        <strong>SV Bad Schwartau</strong><br>
+                        Schwartauer Open<br>
+                        <br>
+
+                        Fragen?
+                        <a href="mailto:info@schachinschwartau.de">
+                            info@schachinschwartau.de
+                        </a>
+
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

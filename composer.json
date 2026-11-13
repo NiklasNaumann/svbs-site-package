@@ -1,0 +1,21 @@
+{
+    "name": "sv-bad-schwartau/sv-bad-schwartau",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "homepage": "https://schachinschwartau.de/",
+    "license": ["GPL-2.0-or-later"],
+    "keywords": ["TYPO3 CMS"],
+    "require": {
+        "bk2k/bootstrap-package": "^16.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SvBadSchwartau\\SvBadSchwartau\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "sv_bad_schwartau"
+        }
+    }
+}
