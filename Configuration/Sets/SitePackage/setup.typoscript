@@ -8,3 +8,14 @@ page {
         sv_bad_schwartau_scripts = EXT:sv_bad_schwartau/Resources/Public/JavaScript/main.js
     }
 }
+
+plugin.tx_ttaddress._LOCAL_LANG {
+    default {
+        label.telephone = Telefon
+        label.email = E-Mail
+    }
+    de {
+        label.telephone = Telefon
+        label.email = E-Mail
+    }
+}

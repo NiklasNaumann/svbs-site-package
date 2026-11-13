@@ -330,18 +330,36 @@ ul.f3-widget-paginator li.next a::after {
     display: none;
 }
 
-/* Telefon */
-
-.tx-ttaddress .list-unstyled li:has(a[href^="tel:"])::before {
-    content: "📞";
-    font-size: 1rem;
+.tx-ttaddress .list-unstyled li:has(a[href^="tel:"]),
+.tx-ttaddress .list-unstyled li:has(a[href^="mailto:"]) {
+    display: grid;
+    grid-template-columns: 1rem 4rem minmax(0, 1fr);
+    align-items: start;
+    column-gap: .5rem;
+    line-height: 1.5;
 }
 
-/* E-Mail */
+.tx-ttaddress .list-unstyled li > span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
 
+.tx-ttaddress .list-unstyled li:has(a[href^="tel:"])::before,
 .tx-ttaddress .list-unstyled li:has(a[href^="mailto:"])::before {
-    content: "✉";
-    font-size: 1rem;
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    margin-top: .25rem;
+    background-color: currentColor;
+    mask: var(--contact-icon) center / contain no-repeat;
+}
+
+.tx-ttaddress .list-unstyled li:has(a[href^="tel:"]) {
+    --contact-icon: url("../Icons/contact-phone.svg");
+}
+
+.tx-ttaddress .list-unstyled li:has(a[href^="mailto:"]) {
+    --contact-icon: url("../Icons/contact-email.svg");
 }
 
 .tx-ttaddress .list-unstyled a {
