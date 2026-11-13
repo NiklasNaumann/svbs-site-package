@@ -262,6 +262,105 @@ ul.f3-widget-paginator li.next a::after {
 }
 
 /* ==========================================================
+   NEWSTICKER
+   ========================================================== */
+
+.svbs-ticker {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+    margin-block: 1.5rem;
+    padding-block: .75rem;
+    border-block: 1px solid #ddd;
+    color: #013859;
+}
+
+.svbs-ticker__title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.svbs-ticker__viewport {
+    flex: 1;
+    min-width: 0;
+}
+
+.svbs-ticker__track {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.svbs-ticker__message {
+    overflow-wrap: anywhere;
+}
+
+.svbs-ticker--running .svbs-ticker__viewport {
+    overflow: hidden;
+}
+
+.svbs-ticker--running .svbs-ticker__track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    padding: 0;
+    list-style: none;
+}
+
+.svbs-ticker--running .svbs-ticker__message {
+    flex: none;
+    white-space: nowrap;
+}
+
+.svbs-ticker--running .svbs-ticker__message::before {
+    content: "+++";
+    margin-right: 1rem;
+    color: #eb3e4a;
+}
+
+.svbs-ticker__toggle {
+    flex: none;
+    min-width: 6.5rem;
+    padding: .35rem .65rem;
+    border: 1px solid currentColor;
+    border-radius: .25rem;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.svbs-ticker__toggle[hidden] {
+    display: none;
+}
+
+.svbs-ticker__toggle:hover {
+    background: #f5f8fb;
+}
+
+.svbs-ticker__toggle:focus-visible,
+.svbs-ticker__viewport:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .svbs-ticker--running .svbs-ticker__track {
+        display: block;
+        width: auto;
+        transform: none !important;
+    }
+
+    .svbs-ticker--running .svbs-ticker__message {
+        white-space: normal;
+    }
+}
+
+/* ==========================================================
    TT_ADDRESS
    ========================================================== */
 

@@ -19,3 +19,9 @@ plugin.tx_ttaddress._LOCAL_LANG {
         label.email = E-Mail
     }
 }
+
+tt_content.svbs_newsticker = FLUIDTEMPLATE
+tt_content.svbs_newsticker {
+    file = EXT:sv_bad_schwartau/Resources/Private/Templates/ContentElements/Newsticker.html
+    dataProcessing.10 = SvBadSchwartau\SvBadSchwartau\DataProcessing\NewstickerProcessor
+}
