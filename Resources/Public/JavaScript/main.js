@@ -4,13 +4,11 @@
     document.querySelectorAll('[data-newsticker]').forEach((ticker) => {
         const viewport = ticker.querySelector('.svbs-ticker__viewport');
         const track = ticker.querySelector('.svbs-ticker__track');
-        const toggle = ticker.querySelector('.svbs-ticker__toggle');
-        if (!viewport || !track || !toggle || !track.animate || !window.ResizeObserver) {
+        if (!viewport || !track || !track.animate || !window.ResizeObserver) {
             return;
         }
 
         let animation;
-        let manuallyPaused = false;
         let hovered = false;
         let focused = false;
 
@@ -18,7 +16,7 @@
             if (!animation) {
                 return;
             }
-            if (manuallyPaused || hovered || focused || document.hidden) {
+            if (hovered || focused || document.hidden) {
                 animation.pause();
             } else {
                 animation.play();
@@ -32,17 +30,14 @@
             animation?.cancel();
             animation = undefined;
             ticker.classList.remove('svbs-ticker--running');
-            toggle.hidden = true;
             if (reducedMotion.matches) {
                 return;
             }
 
             ticker.classList.add('svbs-ticker--running');
-            toggle.hidden = false;
             const width = viewport.clientWidth;
             const trackWidth = track.scrollWidth;
             if (!width || !trackWidth) {
-                toggle.hidden = true;
                 ticker.classList.remove('svbs-ticker--running');
                 return;
             }
@@ -63,11 +58,6 @@
             updatePlayback();
         };
 
-        toggle.addEventListener('click', () => {
-            manuallyPaused = !manuallyPaused;
-            toggle.textContent = manuallyPaused ? 'Fortsetzen' : 'Pause';
-            updatePlayback();
-        });
         viewport.addEventListener('pointerenter', (event) => {
             hovered = event.pointerType === 'mouse';
             updatePlayback();

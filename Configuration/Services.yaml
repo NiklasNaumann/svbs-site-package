@@ -1,0 +1,5 @@
+services:
+  SvBadSchwartau\SvBadSchwartau\Controller\NewstickerController:
+    autowire: true
+    public: true
+    tags: ['backend.controller']

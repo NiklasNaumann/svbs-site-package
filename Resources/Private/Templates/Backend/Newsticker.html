@@ -1,0 +1,39 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Module" />
+<f:section name="Content">
+    <h1>Newsticker</h1>
+    <p>Hier kannst du die Kurzmeldungen für die Website bearbeiten. Eine Meldung pro Zeile; leere Zeilen werden ignoriert.</p>
+    <f:if condition="{error}"><div class="alert alert-danger" role="alert">{error}</div></f:if>
+    <f:if condition="{saved}"><div class="alert alert-success" role="status">Die Kurzmeldungen wurden gespeichert.</div></f:if>
+    <f:if condition="{tickers}">
+        <f:then>
+            <f:for each="{tickers}" as="ticker">
+                <div class="panel panel-default mb-4">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{ticker.pageTitle} – <f:if condition="{ticker.header}"><f:then>{ticker.header}</f:then><f:else>Kurzmeldungen</f:else></f:if></h2>
+                    </div>
+                    <div class="panel-body">
+                        <f:if condition="{ticker.hidden}"><p class="text-muted">Dieser Newsticker ist auf der Website ausgeblendet.</p></f:if>
+                        <form action="{moduleUri}" method="post">
+                            <input type="hidden" name="uid" value="{ticker.uid}">
+                            <input type="hidden" name="formToken" value="{ticker.formToken}">
+                            <input type="hidden" name="revision" value="{ticker.revision}">
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="ticker-messages-{ticker.uid}">Kurzmeldungen</label>
+                                <textarea class="form-control" id="ticker-messages-{ticker.uid}" name="messages" rows="8" aria-describedby="ticker-help-{ticker.uid}">{ticker.bodytext}</textarea>
+                                <p class="form-text" id="ticker-help-{ticker.uid}">Nur Text eingeben. Alle Meldungen entfernen und speichern, um den Ticker leer zu lassen.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Speichern</button>
+                        </form>
+                    </div>
+                </div>
+            </f:for>
+        </f:then>
+        <f:else>
+            <div class="alert alert-info">
+                Kein bearbeitbarer Newsticker vorhanden. Eine Administration muss den Ticker einmalig auf der gewünschten Seite platzieren und dir die passenden Bearbeitungsrechte geben.
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+</html>

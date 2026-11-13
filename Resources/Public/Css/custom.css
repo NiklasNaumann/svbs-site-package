@@ -322,27 +322,6 @@ ul.f3-widget-paginator li.next a::after {
     color: #eb3e4a;
 }
 
-.svbs-ticker__toggle {
-    flex: none;
-    min-width: 6.5rem;
-    padding: .35rem .65rem;
-    border: 1px solid currentColor;
-    border-radius: .25rem;
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-}
-
-.svbs-ticker__toggle[hidden] {
-    display: none;
-}
-
-.svbs-ticker__toggle:hover {
-    background: #f5f8fb;
-}
-
-.svbs-ticker__toggle:focus-visible,
 .svbs-ticker__viewport:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 3px;
