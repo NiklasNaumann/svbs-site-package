@@ -267,11 +267,12 @@ ul.f3-widget-paginator li.next a::after {
 
 .tx-ttaddress .tt_address_list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
     gap: 1rem;
 }
 
 .tx-ttaddress .tt_address_detail {
+    min-width: 0;
     background: #fff;
     border: 1px solid #ddd;
     border-left: 6px solid #1f4e79;
@@ -290,8 +291,8 @@ ul.f3-widget-paginator li.next a::after {
 
 .tx-ttaddress .tt-address-meta {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .75rem;
     align-items: center;
 }
 
@@ -308,8 +309,9 @@ ul.f3-widget-paginator li.next a::after {
 
 .tx-ttaddress .list-unstyled {
     display: flex;
-    gap: 1.25rem;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: .5rem;
+    min-width: 0;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -317,10 +319,11 @@ ul.f3-widget-paginator li.next a::after {
 
 .tx-ttaddress .list-unstyled li {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: .35rem;
+    min-width: 0;
     margin: 0;
-    white-space: nowrap;
+    white-space: normal;
 }
 
 .tx-ttaddress .list-unstyled i {
@@ -342,6 +345,8 @@ ul.f3-widget-paginator li.next a::after {
 }
 
 .tx-ttaddress .list-unstyled a {
+    min-width: 0;
+    overflow-wrap: anywhere;
     color: #1f4e79;
     text-decoration: none;
 }
@@ -353,15 +358,5 @@ ul.f3-widget-paginator li.next a::after {
 @media (max-width: 768px) {
     .tx-ttaddress .tt_address_list {
         grid-template-columns: 1fr;
-    }
-
-    .tx-ttaddress .tt-address-meta {
-        grid-template-columns: 1fr;
-        gap: .75rem;
-    }
-
-    .tx-ttaddress .list-unstyled {
-        justify-content: flex-start;
-        flex-wrap: wrap;
     }
 }
