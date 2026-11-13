@@ -11,24 +11,12 @@ ExtensionManagementUtility::addTcaSelectItem('tt_content', 'CType', [
     'value' => 'svbs_newsticker',
     'icon' => 'content-text',
     'group' => 'default',
-    'description' => 'Eigene Kurzmeldungen als Laufband anzeigen. Eine Meldung pro Zeile.',
+    'description' => 'Zeigt die zentral im Backend-Modul „Newsticker“ verwalteten Kurzmeldungen an.',
 ]);
 
 $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes']['svbs_newsticker'] = 'content-text';
 $GLOBALS['TCA']['tt_content']['types']['svbs_newsticker'] = [
-    'showitem' => 'header, bodytext',
-    'columnsOverrides' => [
-        'header' => [
-            'label' => 'Bezeichnung des Newstickers',
-            'description' => 'Zum Beispiel „Kurzmeldungen“. Ohne Angabe wird „Kurzmeldungen“ verwendet.',
-        ],
-        'bodytext' => [
-            'label' => 'Kurzmeldungen',
-            'description' => 'Eine Meldung pro Zeile. Leerzeilen werden ignoriert. Bitte nur Text eingeben.',
-            'config' => [
-                'enableRichtext' => false,
-                'rows' => 8,
-            ],
-        ],
-    ],
+    // TYPO3 13.4 adds the placement, language and access fields automatically.
+    // Messages are edited only in the dedicated Newsticker backend module.
+    'showitem' => '',
 ];

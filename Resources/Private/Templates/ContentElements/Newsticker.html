@@ -1,9 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:if condition="{tickerMessages}">
     <section id="c{data.uid}" class="svbs-ticker" data-newsticker aria-labelledby="ticker-title-{data.uid}">
-        <h2 id="ticker-title-{data.uid}" class="svbs-ticker__title">
-            <f:if condition="{data.header}"><f:then>{data.header}</f:then><f:else>Kurzmeldungen</f:else></f:if>
-        </h2>
+        <h2 id="ticker-title-{data.uid}" class="svbs-ticker__title">Kurzmeldungen</h2>
         <div class="svbs-ticker__viewport" tabindex="0" aria-label="Kurzmeldungen – zum Anhalten fokussieren">
             <ul id="ticker-track-{data.uid}" class="svbs-ticker__track">
                 <f:for each="{tickerMessages}" as="message">

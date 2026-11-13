@@ -1,0 +1,11 @@
+categories:
+  svbs.newsticker:
+    label: 'Newsticker'
+
+settings:
+  svbs.newsticker.storagePid:
+    label: 'Speicherordner für Kurzmeldungen (PID)'
+    description: 'Seiten-ID des Systemordners, in dem die Newsticker-Meldungen dieser Website gespeichert werden. 0 deaktiviert die Ausgabe.'
+    category: svbs.newsticker
+    type: int
+    default: 0

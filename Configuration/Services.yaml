@@ -1,4 +1,11 @@
 services:
+  SvBadSchwartau\SvBadSchwartau\Domain\Repository\NewstickerRepository:
+    autowire: true
+
+  SvBadSchwartau\SvBadSchwartau\DataProcessing\NewstickerProcessor:
+    autowire: true
+    public: true
+
   SvBadSchwartau\SvBadSchwartau\Controller\NewstickerController:
     autowire: true
     public: true

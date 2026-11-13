@@ -2,36 +2,88 @@
 <f:layout name="Module" />
 <f:section name="Content">
     <h1>Newsticker</h1>
-    <p>Hier kannst du die Kurzmeldungen für die Website bearbeiten. Eine Meldung pro Zeile; leere Zeilen werden ignoriert.</p>
+    <p>Neue Kurzmeldungen hinzufügen und vorhandene Meldungen verwalten.</p>
     <f:if condition="{error}"><div class="alert alert-danger" role="alert">{error}</div></f:if>
-    <f:if condition="{saved}"><div class="alert alert-success" role="status">Die Kurzmeldungen wurden gespeichert.</div></f:if>
-    <f:if condition="{tickers}">
-        <f:then>
-            <f:for each="{tickers}" as="ticker">
-                <div class="panel panel-default mb-4">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">{ticker.pageTitle} – <f:if condition="{ticker.header}"><f:then>{ticker.header}</f:then><f:else>Kurzmeldungen</f:else></f:if></h2>
-                    </div>
-                    <div class="panel-body">
-                        <f:if condition="{ticker.hidden}"><p class="text-muted">Dieser Newsticker ist auf der Website ausgeblendet.</p></f:if>
-                        <form action="{moduleUri}" method="post">
-                            <input type="hidden" name="uid" value="{ticker.uid}">
-                            <input type="hidden" name="formToken" value="{ticker.formToken}">
-                            <input type="hidden" name="revision" value="{ticker.revision}">
-                            <div class="form-group mb-3">
-                                <label class="form-label" for="ticker-messages-{ticker.uid}">Kurzmeldungen</label>
-                                <textarea class="form-control" id="ticker-messages-{ticker.uid}" name="messages" rows="8" aria-describedby="ticker-help-{ticker.uid}">{ticker.bodytext}</textarea>
-                                <p class="form-text" id="ticker-help-{ticker.uid}">Nur Text eingeben. Alle Meldungen entfernen und speichern, um den Ticker leer zu lassen.</p>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Speichern</button>
-                        </form>
-                    </div>
-                </div>
+    <f:if condition="{saved}"><div class="alert alert-success" role="status">Die Änderung wurde gespeichert.</div></f:if>
+    <f:if condition="{sites}">
+        <nav class="mb-3" aria-label="Website auswählen">
+            <f:for each="{sites}" as="website">
+                <a href="{website.uri}" class="btn {f:if(condition: website.selected, then: 'btn-primary', else: 'btn-default')}" aria-current="{f:if(condition: website.selected, then: 'page', else: 'false')}">{website.title}</a>
             </f:for>
+        </nav>
+    </f:if>
+    <f:if condition="{storage}">
+        <f:then>
+            <p class="text-muted">Speicherordner: {storage.folderTitle} (PID {storage.pid}). Neue Meldungen erscheinen zuerst im Ticker.</p>
+            <f:if condition="{canCreate}">
+                <form action="{moduleUri}" method="post" class="panel panel-default mb-4">
+                    <div class="panel-body">
+                        <input type="hidden" name="site" value="{selectedSite}">
+                        <input type="hidden" name="operation" value="create">
+                        <input type="hidden" name="formToken" value="{createToken}">
+                        <label class="form-label" for="new-message">Neue Kurzmeldung</label>
+                        <textarea class="form-control mb-2" id="new-message" name="message" rows="2" maxlength="1000" required aria-describedby="new-message-help">{newMessage}</textarea>
+                        <p class="form-text" id="new-message-help">Eine kurze Nachricht als reinen Text eingeben, maximal 1000 Zeichen.</p>
+                        <button type="submit" class="btn btn-primary">Hinzufügen</button>
+                    </div>
+                </form>
+            </f:if>
+            <h2>Vorhandene Kurzmeldungen</h2>
+            <f:if condition="{messages}">
+                <f:then>
+                    <ul class="list-group">
+                        <f:for each="{messages}" as="message">
+                            <li class="list-group-item">
+                                <p class="mb-1 text-break"><strong>{message.message}</strong></p>
+                                <p class="text-muted">
+                                    <f:if condition="{message.hidden}"><f:then>Ausgeblendet</f:then><f:else>Aktiv</f:else></f:if>
+                                    · <f:format.date format="d.m.Y H:i">{message.crdate}</f:format.date>
+                                </p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <form action="{moduleUri}" method="post">
+                                        <input type="hidden" name="site" value="{selectedSite}">
+                                        <input type="hidden" name="operation" value="toggle">
+                                        <input type="hidden" name="uid" value="{message.uid}">
+                                        <input type="hidden" name="revision" value="{message.revision}">
+                                        <input type="hidden" name="formToken" value="{message.tokens.toggle}">
+                                        <button type="submit" class="btn btn-default"><f:if condition="{message.hidden}"><f:then>Einblenden</f:then><f:else>Ausblenden</f:else></f:if></button>
+                                    </form>
+                                </div>
+                                <details class="mb-2">
+                                    <summary>Bearbeiten</summary>
+                                    <form action="{moduleUri}" method="post" class="mt-2">
+                                        <input type="hidden" name="site" value="{selectedSite}">
+                                        <input type="hidden" name="operation" value="update">
+                                        <input type="hidden" name="uid" value="{message.uid}">
+                                        <input type="hidden" name="revision" value="{message.revision}">
+                                        <input type="hidden" name="formToken" value="{message.tokens.update}">
+                                        <label class="form-label" for="message-{message.uid}">Kurzmeldung bearbeiten</label>
+                                        <textarea class="form-control mb-2" id="message-{message.uid}" name="message" rows="2" maxlength="1000" required>{message.editMessage}</textarea>
+                                        <button type="submit" class="btn btn-primary">Speichern</button>
+                                    </form>
+                                </details>
+                                <details>
+                                    <summary>Löschen</summary>
+                                    <form action="{moduleUri}" method="post" class="mt-2">
+                                        <input type="hidden" name="site" value="{selectedSite}">
+                                        <input type="hidden" name="operation" value="delete">
+                                        <input type="hidden" name="uid" value="{message.uid}">
+                                        <input type="hidden" name="revision" value="{message.revision}">
+                                        <input type="hidden" name="formToken" value="{message.tokens.delete}">
+                                        <p>Diese Kurzmeldung löschen?</p>
+                                        <button type="submit" class="btn btn-danger">Meldung löschen</button>
+                                    </form>
+                                </details>
+                            </li>
+                        </f:for>
+                    </ul>
+                </f:then>
+                <f:else><p class="alert alert-info">Noch keine Kurzmeldungen vorhanden. Oben kannst du die erste Meldung hinzufügen.</p></f:else>
+            </f:if>
         </f:then>
         <f:else>
             <div class="alert alert-info">
-                Kein bearbeitbarer Newsticker vorhanden. Eine Administration muss den Ticker einmalig auf der gewünschten Seite platzieren und dir die passenden Bearbeitungsrechte geben.
+                Kein zugänglicher Speicherordner konfiguriert. Unter Site Management → Settings → Newsticker die PID des Speicherordners eintragen lassen und die Bearbeitungsrechte für diesen Ordner und die Tabelle „Newsticker-Kurzmeldung“ vergeben. Das Modul steht im Live-Arbeitsbereich zur Verfügung.
             </div>
         </f:else>
     </f:if>
